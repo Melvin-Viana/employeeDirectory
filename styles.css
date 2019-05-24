@@ -329,6 +329,28 @@ template {
    top:0;
    right:5%;
 }
+
+/* Employee Containers */
+.employee-container{
+   animation:fadeIn .9s;
+}
+
+@-webkit-keyframes fadeIn {
+   0%   { opacity: 0; }
+   100% { opacity: 1; }
+ }
+ @-moz-keyframes fadeIn {
+   0%   { opacity: 0; }
+   100% { opacity: 1; }
+ }
+ @-o-keyframes fadeIn {
+   0%   { opacity: 0; }
+   100% { opacity: 1; }
+ }
+ @keyframes fadeIn {
+   0%   { opacity: 0; }
+   100% { opacity: 1; }
+ }
 /* ===============
    Media Queries */
 @media (min-width:768px){
