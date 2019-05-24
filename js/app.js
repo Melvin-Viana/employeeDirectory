@@ -1,5 +1,12 @@
-// Elements
-const container = document.querySelector('.container');
+'use strict';
+const container = document.querySelector('.container'),
+  modal = document.querySelector('#modal-container'),
+  modalImage = document.querySelector('.modal-image'),
+  modalEmail =document.querySelector('.email'),
+  modalPhone=document.querySelector('.phone'),
+  modalAddress=document.querySelector('.address'),
+  modalBirthday=document.querySelector('.birthday'),
+   modalCity=document.querySelector('.location');
 
 // TODO: Fetch 12 Random users from the api
 async function fetchData(url){
@@ -9,7 +16,7 @@ async function fetchData(url){
     return data;
 }
 // Fetch users and display error on console if error occurs
-fetchData('https://randomuser.me/a').then(async e=>{await e.results.forEach(e=>generateEmployeeInfo(e))}).catch(e=>console.log(e));
+fetchData('https://randomuser.me/api/?results=20&nat=us').then(async e=>{await e.results.forEach(e=>generateEmployeeInfo(e))}).catch(e=>console.log(e));
 
 //TODO: New random employee information displays each time the page refreshes
 const generateEmployeeInfo = (userData)=>{
@@ -29,7 +36,7 @@ const generateEmployeeInfo = (userData)=>{
     div.append(email);
     container.append(div);
     // Show modal when clicked
-    // div.addEventListener('click',showModal(userData))
+     div.addEventListener('click',()=>showModal(userData))
 }
 
 /*TODO: The directory includes the following:
@@ -39,16 +46,19 @@ const generateEmployeeInfo = (userData)=>{
     City*/
 //** Employees can be filtered by name or username
 
-/*TODO: Modal window displays the following details:
-
-    Employee image
-    Name
-    Email
-    Cell Number
-    Detailed Address, including street name and number, city, state and post code */
-
-    //TODO: Birthdate => Modal
-        
+    //Display Modal with selected userData
+    const showModal=userData=>{
+        const {email,phone,location:{city,state,street},dob:{date},picture:{large}}=userData;
+        // modal.style.animation('fadeIn 1s');
+        modalImage.setAttribute('src', userData.picture.large);
+        modal.style.display="block";
+        modal.style.animation="fadeIn .7s";
+        modalEmail.innerHTML=email;
+        modalPhone.innerHTML=phone;
+        modalCity.innerHTML=city+", "+state;
+        modalAddress.innerHTML=street;
+        modalBirthday.innerHTML=date;
+    }
 // ** Functionality has been added to switch back and forth between employees when the detail modal window is open.
 
 

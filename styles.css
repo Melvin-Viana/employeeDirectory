@@ -295,8 +295,10 @@ template {
 .container{
    margin:0 auto;
    text-align: center;
-   width:90%
+   width:90%;
+   z-index:2;
 }
+
 /* ==============
    Main Content */
    .title{
@@ -305,13 +307,13 @@ template {
 /* ===========
       Modal */
 #modal-container{
-   background:#535c68;
+   background:rgba(12, 12, 12, 0.7);
    display:none;
    height:100vh;
    position:fixed;
-   opacity:.7;
    top:0;
    width:100vw;
+   z-index: 1;
 }
 .modal{
    align-items: center;
@@ -332,7 +334,7 @@ template {
 
 /* Employee Containers */
 .employee-container{
-   animation:fadeIn 1s;
+   animation:fadeIn .7s;
 }
 
 @-webkit-keyframes fadeIn {
