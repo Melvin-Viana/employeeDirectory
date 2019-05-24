@@ -11,6 +11,8 @@ html {
 	padding: 0;
 }
 body {
+   background:#dcdde1;
+   font-family: "Cabin",sans-serif;
 	min-width: 300px;
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -288,7 +290,20 @@ template {
    * Add the correct display in IE 10.
    */
 
-/* Modal */
+/*=============
+   Container */
+.container{
+   margin:0 auto;
+   text-align: center;
+   width:90%
+}
+/* ==============
+   Main Content */
+   .title{
+      margin:1.5em 0;
+   }
+/* ===========
+      Modal */
 #modal-container{
    background:#535c68;
    display:none;
@@ -313,4 +328,11 @@ template {
    position: absolute;
    top:0;
    right:5%;
+}
+/* ===============
+   Media Queries */
+@media (min-width:768px){
+.title{
+   text-align: left;
+}
 }
