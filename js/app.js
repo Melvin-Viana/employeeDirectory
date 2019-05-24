@@ -8,7 +8,9 @@ async function fetchData(url){
 
     return data;
 }
-fetchData('https://randomuser.me/api/?results=12&nat=us').then(e=>{e.results.forEach(e=>generateEmployeeInfo(e))});
+// Fetch users and display error on console if error occurs
+fetchData('https://randomuser.me/a').then(async e=>{await e.results.forEach(e=>generateEmployeeInfo(e))}).catch(e=>console.log(e));
+
 //TODO: New random employee information displays each time the page refreshes
 const generateEmployeeInfo = (userData)=>{
     const div = document.createElement('div')
@@ -44,7 +46,9 @@ const generateEmployeeInfo = (userData)=>{
     Email
     Cell Number
     Detailed Address, including street name and number, city, state and post code */
-//TODO: Birthdate => Modal
+
+    //TODO: Birthdate => Modal
+        
 // ** Functionality has been added to switch back and forth between employees when the detail modal window is open.
 
 

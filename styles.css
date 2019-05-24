@@ -332,7 +332,7 @@ template {
 
 /* Employee Containers */
 .employee-container{
-   animation:fadeIn .9s;
+   animation:fadeIn 1s;
 }
 
 @-webkit-keyframes fadeIn {
