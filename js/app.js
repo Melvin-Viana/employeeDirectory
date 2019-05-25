@@ -31,11 +31,15 @@ const generateEmployeeInfo = (userData)=>{
     const email = document.createElement('p');
     email.classList.add('employee-email');
     email.innerHTML=userData.email;
+    const city = document.createElement('p');
+    city.innerHTML=userData.location.city;
+    city.classList.add('employee-city');
     div.append(img);
     const dataContainer = document.createElement('div');
     dataContainer.classList.add('user-data');
     dataContainer.append(name);
     dataContainer.append(email);
+    dataContainer.append(city);
     div.append(dataContainer);
     container.append(div);
     // Show modal when clicked

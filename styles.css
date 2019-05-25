@@ -346,27 +346,45 @@ template {
    animation:fadeIn .7s;
    align-items: center;
    background:#fff;
-   border:1px solid #ccc;
+   border:2px solid #ccc;
    border-radius:10px;
    display:flex;
    flex-direction: column;
    margin:20px auto;
    padding:25px;
-   min-width:375px;
-   transition:all ease 0.5s;
+   min-width:350px;
+   transition:background ease-out 0.5s;
    width:30%;
+}
+.employee-container:hover{
+   cursor: pointer;
+   background:#F8EFBA;
 }
 
 .user-data{
+   align-items: center;
    display: flex;
    flex-direction: column;
-   align-items: center;
+   justify-content: space-around;
+   height:70%;
 }
 
 .modal-image,.employee-picture{
    width:100px;
    height:auto;
    border-radius:50%;
+}
+
+.employee-name{
+   font-size:1.5em;
+   text-transform:capitalize;
+}
+.employee-email,.employee-city{
+font-weight:light;
+font-size:12px;
+}
+.employee-city{
+   text-transform: capitalize;
 }
 
 @-webkit-keyframes fadeIn {
