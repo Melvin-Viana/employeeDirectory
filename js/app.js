@@ -1,5 +1,5 @@
 'use strict';
-const container = document.querySelector('.container'),
+const container = document.querySelector('.directory-container'),
   modal = document.querySelector('#modal-container'),
   modalImage = document.querySelector('.modal-image'),
   modalEmail =document.querySelector('.email'),
@@ -16,7 +16,7 @@ async function fetchData(url){
     return data;
 }
 // Fetch users and display error on console if error occurs
-fetchData('https://randomuser.me/api/?results=20&nat=us').then(async e=>{await e.results.forEach(e=>generateEmployeeInfo(e))}).catch(e=>console.log(e));
+fetchData('https://randomuser.me/api/?results=12&nat=us').then(async e=>{await e.results.forEach(e=>generateEmployeeInfo(e))}).catch(e=>console.log(e));
 
 //TODO: New random employee information displays each time the page refreshes
 const generateEmployeeInfo = (userData)=>{
@@ -32,8 +32,11 @@ const generateEmployeeInfo = (userData)=>{
     email.classList.add('employee-email');
     email.innerHTML=userData.email;
     div.append(img);
-    div.append(name);
-    div.append(email);
+    const dataContainer = document.createElement('div');
+    dataContainer.classList.add('user-data');
+    dataContainer.append(name);
+    dataContainer.append(email);
+    div.append(dataContainer);
     container.append(div);
     // Show modal when clicked
      div.addEventListener('click',()=>showModal(userData))

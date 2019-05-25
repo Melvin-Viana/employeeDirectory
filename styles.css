@@ -11,7 +11,7 @@ html {
 	padding: 0;
 }
 body {
-   background:#dcdde1;
+   background:#f5f6fa;
    font-family: "Cabin",sans-serif;
 	min-width: 300px;
 }
@@ -294,22 +294,23 @@ template {
    Container */
 .container{
    margin:0 auto;
-   text-align: center;
-   width:90%;
+   max-width:1200px;
+   width:95%;
    z-index:2;
 }
 
 /* ==============
    Main Content */
    .title{
-      margin:1.5em 0;
+      margin:1.5em .5em;
+      text-align: center;
    }
 /* ===========
       Modal */
 #modal-container{
    background:rgba(12, 12, 12, 0.7);
    display:none;
-   height:100vh;
+   height:100%;
    position:fixed;
    top:0;
    width:100vw;
@@ -322,7 +323,7 @@ template {
    top:20%;
    flex-direction: column;
    background:#fff;
-   width:500px;
+   width:200px;
    height:500px;
    margin:0 auto;
 }
@@ -333,8 +334,39 @@ template {
 }
 
 /* Employee Containers */
+.directory-container{
+   display:flex;
+   margin:0 auto;
+   flex-direction: column;
+   flex-wrap:wrap;
+   justify-content: space-around;
+   transition:all ease 0.5s;
+}
 .employee-container{
    animation:fadeIn .7s;
+   align-items: center;
+   background:#fff;
+   border:1px solid #ccc;
+   border-radius:10px;
+   display:flex;
+   flex-direction: column;
+   margin:20px auto;
+   padding:25px;
+   min-width:375px;
+   transition:all ease 0.5s;
+   width:30%;
+}
+
+.user-data{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.modal-image,.employee-picture{
+   width:100px;
+   height:auto;
+   border-radius:50%;
 }
 
 @-webkit-keyframes fadeIn {
@@ -358,5 +390,15 @@ template {
 @media (min-width:768px){
 .title{
    text-align: left;
+}
+.directory-container{
+   flex-direction: row;
+}
+.employee-container{
+   flex-direction: row;
+}
+.user-data{
+align-items:flex-start;
+margin-left:1em;
 }
 }
