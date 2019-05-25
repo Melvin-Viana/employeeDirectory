@@ -342,7 +342,8 @@ template {
 	right: 10%;
 }
 .close:hover {
-	cursor: pointer;
+   cursor: pointer;
+   color:#000;
 }
 .location,
 .address {
@@ -397,7 +398,7 @@ hr {
 }
 .employee-container:hover {
 	cursor: pointer;
-	background: #fab1a0;
+	background: #718093;
 }
 
 .user-data {
