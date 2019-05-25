@@ -334,12 +334,14 @@ template {
 	height: 400px;
    margin: 0 auto;
    padding: 15px;
+   z-index:2;
 
 }
 .close {
 	position: absolute;
-	top: 2%;
-	right: 10%;
+	top: -1%;
+   right: 15%;
+   transition:ease-out color .3s
 }
 .close:hover {
    cursor: pointer;
@@ -373,6 +375,32 @@ hr {
 	font-weight:bold;
 	font-size:20px;
 }
+.ed-nav{
+	display: flex;
+	color:#ff7979;
+   position:absolute;
+   height:100%;
+	width: 100%;
+	transition:width ease-out 0.7s;
+   z-index:-2;
+   justify-content:space-between;
+   }
+.ed-nav div{height: 100%;width: 45%;}
+.left,.right{
+   position:absolute;
+   color:currentColor;
+   stroke:#fff;
+   top:50%;
+}
+.right{
+right:0;
+}
+.left{
+   transform:rotate(-180deg);
+}
+
+
+
 /* Employee Containers */
 .directory-container {
 	display: flex;
@@ -429,6 +457,7 @@ hr {
 .employee-city {
 	text-transform: capitalize;
 }
+
 /* =======================
       KEYFRAMES */
 @-webkit-keyframes fadeIn {
@@ -511,4 +540,25 @@ hr {
 		align-items: flex-start;
 		margin-left: 1em;
 	}
+}
+/* Computer only media query */
+@media(min-width:400px) and (hover:hover){
+	.ed-nav{
+		width: 125%;
+	}
+	.left-container,.right-container{transition:ease-out 0.7s color;opacity:0;
+		-webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;
+		-o-transition: all 0.5s ease-in-out;
+		transition: all 0.5s ease-in-out;}
+	.left-container:hover,.right-container:hover{
+		cursor:pointer;
+			opacity:1.0;
+		filter:alpha(opacity=100);
+	}
+}
+@media(min-width:400px) and (hover:none){
+.ed-nav{
+	width:125%;
+}
 }

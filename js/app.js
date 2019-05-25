@@ -74,23 +74,23 @@ const showModal = userData => {
             last
         }
     } = userData;
-    // modal.style.animation('fadeIn 1s');
     modalImage.setAttribute('src', userData.picture.large);
     modal.style.display = "inline";
-    modal.style.animation = "fadeIn .7s";
+    modal.style.animation = "fadeIn .5s";
     modalName.innerHTML = `${first} ${last}`;
     modalEmail.innerHTML = email;
     modalPhone.innerHTML = phone;
     modalCity.innerHTML = city + ", " + state;
     modalAddress.innerHTML = street;
     modalBirthday.innerHTML = date;
-    modal.style.animation = "fadeIn .7s";
 }
 // ** Functionality has been added to switch back and forth between employees when the detail modal window is open.
 
 
 // Close
 close.addEventListener('click', () => {
-    modal.style.animation = "fadeOut .7s";
-    setTimeout(() => modal.style.display = "none", 600);
+    modal.style.animation = "fadeOut .5s";
+    setTimeout(() => modal.style.display = "none", 400);
 });
+    
+    document.querySelector('body').addEventListener('click', (e)=>{console.log(e.target)})
