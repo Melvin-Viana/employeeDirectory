@@ -15,6 +15,10 @@ body {
    font-family: "Cabin",sans-serif;
 	min-width: 300px;
 }
+
+::selection{
+   background:#fab1a0;
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -323,7 +327,7 @@ template {
    top:20%;
    flex-direction: column;
    background:#fff;
-   width:200px;
+   width:300px;
    height:500px;
    margin:0 auto;
 }
@@ -331,6 +335,9 @@ template {
    position: absolute;
    top:0;
    right:5%;
+}
+.close:hover{
+   cursor: pointer;
 }
 
 /* Employee Containers */
@@ -358,7 +365,7 @@ template {
 }
 .employee-container:hover{
    cursor: pointer;
-   background:#F8EFBA;
+   background:#fab1a0;
 }
 
 .user-data{
@@ -377,6 +384,7 @@ template {
 
 .employee-name{
    font-size:1.5em;
+   min-width:180px;
    text-transform:capitalize;
 }
 .employee-email,.employee-city{
@@ -386,7 +394,8 @@ font-size:12px;
 .employee-city{
    text-transform: capitalize;
 }
-
+/* =======================
+      KEYFRAMES */
 @-webkit-keyframes fadeIn {
    0%   { opacity: 0; }
    100% { opacity: 1; }
@@ -402,6 +411,22 @@ font-size:12px;
  @keyframes fadeIn {
    0%   { opacity: 0; }
    100% { opacity: 1; }
+ }
+ @-webkit-keyframes fadeOut {
+   0%   { opacity: 1; }
+   100% { opacity: 0; }
+ }
+ @-moz-keyframes fadeOut {
+   0%   { opacity: 1; }
+   100% { opacity: 0; }
+ }
+ @-o-keyframes fadeOut {
+   0%   { opacity: 1; }
+   100% { opacity: 0; }
+ }
+ @keyframes fadeOut {
+   0%   { opacity: 1; }
+   100% { opacity: 0; }
  }
 /* ===============
    Media Queries */

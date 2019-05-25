@@ -6,7 +6,8 @@ const container = document.querySelector('.directory-container'),
   modalPhone=document.querySelector('.phone'),
   modalAddress=document.querySelector('.address'),
   modalBirthday=document.querySelector('.birthday'),
-   modalCity=document.querySelector('.location');
+   modalCity=document.querySelector('.location'),
+   close=document.querySelector('.close');
 
 // TODO: Fetch 12 Random users from the api
 async function fetchData(url){
@@ -69,5 +70,8 @@ const generateEmployeeInfo = (userData)=>{
 // ** Functionality has been added to switch back and forth between employees when the detail modal window is open.
 
 
-//TODO: Directory has been styled so that all the major elements are in place and roughly matches the mockups
-
+// Close 
+close.addEventListener('click',()=>{
+    modal.style.display="none";
+    console.log('hello');
+});
