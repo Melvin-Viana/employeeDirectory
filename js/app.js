@@ -2,6 +2,7 @@
 const container = document.querySelector('.directory-container'),
   modal = document.querySelector('#modal-container'),
   modalImage = document.querySelector('.modal-image'),
+  modalName=document.querySelector('.name'),
   modalEmail =document.querySelector('.email'),
   modalPhone=document.querySelector('.phone'),
   modalAddress=document.querySelector('.address'),
@@ -17,10 +18,10 @@ async function fetchData(url){
     return data;
 }
 // Fetch users and display error on console if error occurs
-fetchData('https://randomuser.me/api/?results=12&nat=us').then(async e=>{await e.results.forEach(e=>generateEmployeeInfo(e))}).catch(e=>console.log(e));
+fetchData('https://randomuser.me/api/?results=12&nat=us').then(async e=>{await e.results.forEach((item,index)=>generateEmployeeInfo(item,index))}).catch(e=>console.log(e));
 
 //TODO: New random employee information displays each time the page refreshes
-const generateEmployeeInfo = (userData)=>{
+const generateEmployeeInfo = (userData,index)=>{
     const div = document.createElement('div')
     div.classList.add("employee-container");
     const img = document.createElement('img');
@@ -44,6 +45,7 @@ const generateEmployeeInfo = (userData)=>{
     div.append(dataContainer);
     container.append(div);
     // Show modal when clicked
+    div.style.order=index+1;
      div.addEventListener('click',()=>showModal(userData))
 }
 
@@ -56,22 +58,24 @@ const generateEmployeeInfo = (userData)=>{
 
     //Display Modal with selected userData
     const showModal=userData=>{
-        const {email,phone,location:{city,state,street},dob:{date},picture:{large}}=userData;
+        const {email,phone,location:{city,state,street},dob:{date},picture:{large},name:{first,last}}=userData;
         // modal.style.animation('fadeIn 1s');
         modalImage.setAttribute('src', userData.picture.large);
-        modal.style.display="block";
+        modal.style.display="inline";
         modal.style.animation="fadeIn .7s";
+        modalName.innerHTML=`${first} ${last}`;
         modalEmail.innerHTML=email;
         modalPhone.innerHTML=phone;
         modalCity.innerHTML=city+", "+state;
         modalAddress.innerHTML=street;
         modalBirthday.innerHTML=date;
+        modal.style.animation="fadeIn .7s";
     }
 // ** Functionality has been added to switch back and forth between employees when the detail modal window is open.
 
 
-// Close 
+// Close
 close.addEventListener('click',()=>{
-    modal.style.display="none";
-    console.log('hello');
+    modal.style.animation="fadeOut .7s";
+    setTimeout(()=>modal.style.display="none",600);
 });
