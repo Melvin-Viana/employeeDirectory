@@ -17,7 +17,7 @@ body {
 }
 
 ::selection {
-	background: #fab1a0;
+	background: #EA638C;
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
@@ -324,7 +324,7 @@ template {
 	align-items: center;
 	position: relative;
    display: flex;
-   color:#718093;
+   color:#30343F;
 	border-radius:10px;
 	top: 20%;
 	flex-direction: column;
@@ -385,7 +385,7 @@ hr {
    z-index:-2;
    justify-content:space-between;
    }
-.ed-nav div{height: 100%;width: 45%;}
+.ed-nav div{height: 100%;width: 25%;}
 .left,.right{
    position:absolute;
    color:currentColor;
@@ -431,7 +431,7 @@ right:0;
 }
 .employee-container:hover {
 	cursor: pointer;
-	background: #718093;
+	background: #FFD9DA;
 }
 
 .user-data {
@@ -462,7 +462,29 @@ right:0;
 .employee-city {
 	text-transform: capitalize;
 }
+/* =======================
+		Filters */
 
+		.filter-container{
+			display:flex;
+			flex-direction: row;
+			margin-left:auto;
+			align-items: center;
+		}
+		.filter-container h3{
+			margin-left: 1.5em;
+			padding:5px;
+		}
+		.filter-container p{
+			font-size:14px;
+			margin-left:10px;
+			padding:5px;
+			transition: color ease .3s;
+		}
+		.filter-container p:hover{
+			cursor: pointer;
+			color:#EA638C;
+		}
 /* =======================
       KEYFRAMES */
 @-webkit-keyframes fadeIn {
