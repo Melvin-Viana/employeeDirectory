@@ -570,7 +570,7 @@ right:0;
 	}
 }
 /* Computer only media query */
-@media(min-width:400px) and (hover:hover){
+@media(min-width:400px){
 	.ed-nav{
 		width: 125%;
 	}
