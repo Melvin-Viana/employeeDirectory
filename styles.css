@@ -425,7 +425,6 @@ right:0;
 	flex-direction: column;
 	margin: 20px auto;
 	padding: 25px;
-	min-width: 350px;
 	transition: background ease-out 0.3s;
 	width: 30%;
 }
@@ -451,7 +450,6 @@ right:0;
 
 .employee-name {
 	font-size: 1.5em;
-	min-width: 200px;
 	text-transform: capitalize;
 }
 .employee-email,
@@ -465,10 +463,10 @@ right:0;
 /* =======================
 		Filters */
 
+	
 		.filter-container{
 			display:flex;
-			flex-direction: row;
-			margin-left:auto;
+			flex-direction: column;
 			align-items: center;
 		}
 		.filter-container h3{
@@ -563,6 +561,9 @@ right:0;
 	.employee-container {
 		flex-direction: row;
 	}
+	.employee-name{
+		min-width: 150px;
+	}
 	.user-data {
 		align-items: flex-start;
 		margin-left: 1em;
@@ -578,6 +579,14 @@ right:0;
 		cursor:pointer;
 		color:#778ca3;
 	}
+	.employee-container{
+		min-width: 320px;
+	}
+
+	.filter-container{
+		flex-direction: row;
+		margin-left:auto;
+	}
 }
 @media(min-width:400px) and (hover:none){
 .ed-nav{
@@ -587,5 +596,8 @@ right:0;
 @media(hover:none){
 .ed-nav{
 	color:#778ca3;
+}
+.employee-container{
+	min-width: 300px;
 }
 }
