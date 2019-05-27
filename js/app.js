@@ -163,7 +163,7 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
     });
 
 const getDate = (date) => {
-    return getMonthName(date.getMonth()) + " " + date.getDay();
+    return getMonthName(date.getMonth()) + " " + date.getDate();
 }
 
 const getMonthName = (month) => {
