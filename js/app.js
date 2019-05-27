@@ -59,7 +59,8 @@ const showModal = (userData, index) => {
         location: {
             city,
             state,
-            street
+            street,
+            postcode
         },
         dob: {
             date
@@ -73,7 +74,7 @@ const showModal = (userData, index) => {
         }
     } = userData;
     // Convert UTC date to Date
-    let birthDate=new Date(date);
+    let birthDate = new Date(date);
 
     // TODO: Format Address and Date
     modalImage.setAttribute('src', userData.picture.large);
@@ -82,8 +83,8 @@ const showModal = (userData, index) => {
     modalName.innerHTML = `${first} ${last}`;
     modalEmail.innerHTML = email;
     modalPhone.innerHTML = phone;
-    modalCity.innerHTML = city + ", " + state;
-    modalAddress.innerHTML = street;
+    modalCity.innerHTML = city ;
+    modalAddress.innerHTML = `${street}, ${states_hash[state]} ${postcode} `;
     modalBirthday.innerHTML = `Birthday: ${getDate(birthDate)}`;
     employeeIndex = index;
     (employeeIndex == 0) ? leftContainer.style.display = "none": leftContainer.style.display = "block";
@@ -94,79 +95,141 @@ const showModal = (userData, index) => {
 // Fetch users and display error on console if error occurs
 fetchData('https://randomuser.me/api/?results=12&nat=us')
     .then(async e => {
-    await e.results.forEach((item, index) => {
-        generateEmployeeInfo(item, index);
-        userResults.push(item);
-    })
-        }).catch(e => console.log(e))
-            .finally(() => {
-                const modal = document.querySelector('.modal');
-                // Close
-                close.addEventListener('click', () => {
-                    modalContainer.style.animation = "fadeOut .5s";
-                    setTimeout(() => modalContainer.style.display = "none", 400);
-                });
+        await e.results.forEach((item, index) => {
+            generateEmployeeInfo(item, index);
+            userResults.push(item);
+        })
+    }).catch(e => console.log(e))
+    .finally(() => {
+        const modal = document.querySelector('.modal');
+        // Close
+        close.addEventListener('click', () => {
+            modalContainer.style.animation = "fadeOut .5s";
+            setTimeout(() => modalContainer.style.display = "none", 400);
+        });
 
 
         // ** Functionality has been added to switch back and forth between employees when the detail modal window is open.
 
-            // Left arrow previous user
-                leftContainer.addEventListener('click', () => {
-                    if (employeeIndex == 0) {
-                        return false;
-                    }
+        // Left arrow previous user
+        leftContainer.addEventListener('click', () => {
+            if (employeeIndex == 0) {
+                return false;
+            }
 
-                    employeeIndex--;
-                    modal.style.display = "none",
-                        modal.style.animation = "fadeIn .5s";
-                    modal.style.display = "flex",
-                        showModal(userResults[employeeIndex], employeeIndex);
-                        setTimeout(() => {
-                            modal.style.animation = ""
-                        }, 500);
-                });
-                // Right arrow next user
-                rightContainer.addEventListener('click', () => {
-                    if (employeeIndex == 11) {
-                        return false;
-                    }
-                    employeeIndex++;
-                    modal.style.display = "none",
-                    modal.style.animation = "fadeIn .5s";
-                    modal.style.display = "flex",
-                        showModal(userResults[employeeIndex], employeeIndex);
+            employeeIndex--;
+            modal.style.display = "none",
+                modal.style.animation = "fadeIn .5s";
+            modal.style.display = "flex",
+                showModal(userResults[employeeIndex], employeeIndex);
+            setTimeout(() => {
+                modal.style.animation = ""
+            }, 500);
+        });
+        // Right arrow next user
+        rightContainer.addEventListener('click', () => {
+            if (employeeIndex == 11) {
+                return false;
+            }
+            employeeIndex++;
+            modal.style.display = "none",
+                modal.style.animation = "fadeIn .5s";
+            modal.style.display = "flex",
+                showModal(userResults[employeeIndex], employeeIndex);
 
-                    setTimeout(() => {
-                        modal.style.animation = ""
-                    }, 500);
-                });
-                //** Employees can be filtered by name or username
+            setTimeout(() => {
+                modal.style.animation = ""
+            }, 500);
+        });
+        //** Employees can be filtered by name or username
 
-                const aTozFilter = document.querySelector('.fName-az'),
-                zToaFilter = document.querySelector('.fName-za');
+        const aTozFilter = document.querySelector('.fName-az'),
+            zToaFilter = document.querySelector('.fName-za');
 
-                aTozFilter.addEventListener('click',
-                ()=>{
-                    directoryContainer.innerHTML="";
-                    userResults.sort((a,b)=>(a.name.first>b.name.first)?1:-1);
-                    userResults.forEach((item,index)=>generateEmployeeInfo(item,index));
-                });
-
-                zToaFilter.addEventListener('click',
-                ()=>{
-                    directoryContainer.innerHTML="";
-                    userResults.sort((a,b)=>(a.name.first<b.name.first)?1:-1);
-                    userResults.forEach((item,index)=>generateEmployeeInfo(item,index));
-                });
-
+        aTozFilter.addEventListener('click',
+            () => {
+                directoryContainer.innerHTML = "";
+                userResults.sort((a, b) => (a.name.first > b.name.first) ? 1 : -1);
+                userResults.forEach((item, index) => generateEmployeeInfo(item, index));
             });
 
-const getDate = (date)=>{
-    return getMonthName(date.getMonth())+" "+date.getDay();
+        zToaFilter.addEventListener('click',
+            () => {
+                directoryContainer.innerHTML = "";
+                userResults.sort((a, b) => (a.name.first < b.name.first) ? 1 : -1);
+                userResults.forEach((item, index) => generateEmployeeInfo(item, index));
+            });
+
+    });
+
+const getDate = (date) => {
+    return getMonthName(date.getMonth()) + " " + date.getDay();
 }
 
-const getMonthName =(month)=>{
-    const arr=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const getMonthName = (month) => {
+    const arr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     return arr[month];
 }
-
+// State object to convert to abbreviation
+const states_hash =
+    {
+        "wyoming": "WY",
+        "wisconsin": "WI",
+        "west virginia": "WV",
+        "washington": "WA",
+        "virginia": "VA",
+        "virgin islands": "VI",
+        "vermont": "VT",
+        "utah": "UT",
+        "texas": "TX",
+        "tennessee": "TN",
+        "south dakota": "SD",
+        "south carolina": "SC",
+        "rhode island": "RI",
+        "puerto rico": "PR",
+        "pennsylvania": "PA",
+        "palau": "PW",
+        "oregon": "OR",
+        "oklahoma": "OK",
+        "ohio": "OH",
+        "northern mariana islands": "MP",
+        "north dakota": "ND",
+        "north carolina": "NC",
+        "new york": "NY",
+        "new mexico": "NM",
+        "new jersey": "NJ",
+        "new hampshire": "NH",
+        "nevada": "NV",
+        "nebraska": "NE",
+        "montana": "MT",
+        "missouri": "MO",
+        "mississippi": "MS",
+        "minnesota": "MN",
+        "michigan": "MI",
+        "massachusetts": "MA",
+        "maryland": "MD",
+        "marshall islands": "MH",
+        "maine": "ME",
+        "louisiana": "LA",
+        "kentucky": "KY",
+        "kansas": "KS",
+        "iowa": "IA",
+        "indiana": "IN",
+        "illinois": "IL",
+        "idaho": "ID",
+        "hawaii": "HI",
+        "guam": "GU",
+        "georgia": "GA",
+        "florida": "FL",
+        "federated states of micronesia": "FM",
+        "district of columbia": "DC",
+        "delaware": "DE",
+        "connecticut": "CT",
+        "colorado": "CO",
+        "california": "CA",
+        "arkansas": "AR",
+        "arizona": "AZ",
+        "american samoa": "AS",
+        "alaska": "AK",
+        "alabama": "AL"
+    }
