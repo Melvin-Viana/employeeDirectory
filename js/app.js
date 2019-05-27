@@ -72,6 +72,10 @@ const showModal = (userData, index) => {
             last
         }
     } = userData;
+    // Convert UTC date to Date
+    let birthDate=new Date(date);
+
+    // TODO: Format Address and Date
     modalImage.setAttribute('src', userData.picture.large);
     modalContainer.style.display = "inline";
     modalContainer.style.animation = "fadeIn .5s";
@@ -80,11 +84,12 @@ const showModal = (userData, index) => {
     modalPhone.innerHTML = phone;
     modalCity.innerHTML = city + ", " + state;
     modalAddress.innerHTML = street;
-    modalBirthday.innerHTML = date;
+    modalBirthday.innerHTML = `Birthday: ${getDate(birthDate)}`;
     employeeIndex = index;
     (employeeIndex == 0) ? leftContainer.style.display = "none": leftContainer.style.display = "block";
     (employeeIndex == 11) ? rightContainer.style.display = "none": rightContainer.style.display = "block";
 }
+
 
 // Fetch users and display error on console if error occurs
 fetchData('https://randomuser.me/api/?results=12&nat=us')
@@ -135,6 +140,8 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
                         modal.style.animation = ""
                     }, 500);
                 });
+                //** Employees can be filtered by name or username
+
                 const aTozFilter = document.querySelector('.fName-az'),
                 zToaFilter = document.querySelector('.fName-za');
 
@@ -154,6 +161,12 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
 
             });
 
+const getDate = (date)=>{
+    return getMonthName(date.getMonth())+" "+date.getDay();
+}
 
+const getMonthName =(month)=>{
+    const arr=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return arr[month];
+}
 
-            //** Employees can be filtered by name or username
