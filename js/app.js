@@ -77,7 +77,7 @@ const showModal = (userData, index) => {
     let birthDate = new Date(date);
 
     // TODO: Format Address and Date
-    modalImage.setAttribute('src', userData.picture.large);
+    modalImage.setAttribute('src', large);
     modalContainer.style.display = "inline";
     modalContainer.style.animation = "fadeIn .5s";
     modalName.innerHTML = `${first} ${last}`;
@@ -87,6 +87,7 @@ const showModal = (userData, index) => {
     modalAddress.innerHTML = `${street}, ${states_hash[state]} ${postcode} `;
     modalBirthday.innerHTML = `Birthday: ${getDate(birthDate)}`;
     employeeIndex = index;
+    // Hide arrows if prev/next user not available
     (employeeIndex == 0) ? leftContainer.style.display = "none": leftContainer.style.display = "block";
     (employeeIndex == 11) ? rightContainer.style.display = "none": rightContainer.style.display = "block";
 }
@@ -101,7 +102,6 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
         })
     }).catch(e => console.log(e))
     .finally(() => {
-        const modal = document.querySelector('.modal');
         // Close
         close.addEventListener('click', () => {
             modalContainer.style.animation = "fadeOut .5s";
@@ -118,13 +118,7 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
             }
 
             employeeIndex--;
-            modal.style.display = "none",
-                modal.style.animation = "fadeIn .5s";
-            modal.style.display = "flex",
-                showModal(userResults[employeeIndex], employeeIndex);
-            setTimeout(() => {
-                modal.style.animation = ""
-            }, 500);
+            modalSwitch();
         });
         // Right arrow next user
         rightContainer.addEventListener('click', () => {
@@ -132,14 +126,7 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
                 return false;
             }
             employeeIndex++;
-            modal.style.display = "none",
-                modal.style.animation = "fadeIn .5s";
-            modal.style.display = "flex",
-                showModal(userResults[employeeIndex], employeeIndex);
-
-            setTimeout(() => {
-                modal.style.animation = ""
-            }, 500);
+           modalSwitch();
         });
         //** Employees can be filtered by name or username
 
@@ -232,3 +219,14 @@ const filterCallback =(prop1,nestedProp,reverse)=>{
     (reverse)?userResults.reverse(sortBy(prop1,nestedProp)):userResults.sort(sortBy(prop1,nestedProp));
     userResults.forEach((item, index) => generateEmployeeInfo(item, index));
     }
+const modalSwitch = ()=>{
+    const modal = document.querySelector('.modal');
+    modal.style.display = "none",
+    modal.style.animation = "fadeIn .5s";
+    modal.style.display = "flex",
+        showModal(userResults[employeeIndex], employeeIndex);
+
+    setTimeout(() => {
+        modal.style.animation = ""
+    }, 500);
+}
