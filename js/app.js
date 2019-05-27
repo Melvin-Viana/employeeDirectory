@@ -146,19 +146,9 @@ fetchData('https://randomuser.me/api/?results=12&nat=us')
         const aTozFilter = document.querySelector('.fName-az'),
             zToaFilter = document.querySelector('.fName-za');
 
-        aTozFilter.addEventListener('click',
-            () => {
-                directoryContainer.innerHTML = "";
-                userResults.sort((a, b) => (a.name.first > b.name.first) ? 1 : -1);
-                userResults.forEach((item, index) => generateEmployeeInfo(item, index));
-            });
+        aTozFilter.addEventListener('click',()=>filterCallback('name','first',false));
 
-        zToaFilter.addEventListener('click',
-            () => {
-                directoryContainer.innerHTML = "";
-                userResults.sort((a, b) => (a.name.first < b.name.first) ? 1 : -1);
-                userResults.forEach((item, index) => generateEmployeeInfo(item, index));
-            });
+        zToaFilter.addEventListener('click',()=>filterCallback('name','first',true));
 
     });
 
@@ -232,4 +222,13 @@ const states_hash =
         "american samoa": "AS",
         "alaska": "AK",
         "alabama": "AL"
+    }
+
+// Sort Function
+const sortBy = (prop,nestedProp) => (prop1,prop2) => (prop1[prop][nestedProp]>prop2[prop][nestedProp])?1:-1 ;
+// Callback function for filter click event
+const filterCallback =(prop1,nestedProp,reverse)=>{
+    directoryContainer.innerHTML = "";
+    (reverse)?userResults.reverse(sortBy(prop1,nestedProp)):userResults.sort(sortBy(prop1,nestedProp));
+    userResults.forEach((item, index) => generateEmployeeInfo(item, index));
     }
