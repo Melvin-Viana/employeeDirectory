@@ -562,7 +562,7 @@ right:0;
 		flex-direction: row;
 	}
 	.employee-name{
-		min-width: 150px;
+		min-width: 180px;
 	}
 	.user-data {
 		align-items: flex-start;
