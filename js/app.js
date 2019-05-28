@@ -77,7 +77,7 @@ const showModal = (userData, index) => {
     changeHTML(modalEmail,email);
     changeHTML(modalPhone,phone);
    changeHTML(modalCity,city);
-    changeHTML(modalAddress, `${street}, ${states_hash[state]} ${postcode} `);
+    changeHTML(modalAddress, `${street}, ${city}, ${states_hash[state]} ${postcode} `);
     changeHTML(modalBirthday, `Birthday: ${getDate(birthDate)}`);
     employeeIndex = index;
     // Hide arrows if prev/next user not available

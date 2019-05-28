@@ -416,7 +416,7 @@ right:0;
 	transition: all ease 0.5s;
 }
 .employee-container {
-	animation: fadeIn 0.7s;
+	animation: fadeIn 0.5s;
 	align-items: center;
 	background: #fff;
 	border: 2px solid #ccc;
