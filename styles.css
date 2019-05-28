@@ -364,9 +364,11 @@ hr {
 }
 .top-modal {
 	height: 75px;
+	font-size: 14px;
 }
 .bottom-modal {
 	height: 75px;
+	font-size:14px;
 }
 
 .name{
