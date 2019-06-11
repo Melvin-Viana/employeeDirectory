@@ -41,7 +41,7 @@ const generateEmployeeInfo = (userData, employeeIndex) => {
 }
 const createElement = (tag, innerHTML, className) => {
     const elem = document.createElement(tag);
-    changeHTML(elem,innerHTML);
+    changeHTML(elem, innerHTML);
     elem.classList.add(className);
     return elem;
 }
@@ -73,10 +73,10 @@ const showModal = (userData, index) => {
     modalImage.setAttribute('src', large);
     modalContainer.style.display = "inline";
     modalContainer.style.animation = "fadeIn .5s";
-    changeHTML(modalName,`${first} ${last}`);
-    changeHTML(modalEmail,email);
-    changeHTML(modalPhone,phone);
-   changeHTML(modalCity,city);
+    changeHTML(modalName, `${first} ${last}`);
+    changeHTML(modalEmail, email);
+    changeHTML(modalPhone, phone);
+    changeHTML(modalCity, city);
     changeHTML(modalAddress, `${street}, ${city}, ${states_hash[state]} ${postcode} `);
     changeHTML(modalBirthday, `Birthday: ${getDate(birthDate)}`);
     employeeIndex = index;
@@ -164,7 +164,7 @@ const filterCallback = (prop1, nestedProp, reverse) => {
     (reverse) ? userResults.reverse(sortBy(prop1, nestedProp)): userResults.sort(sortBy(prop1, nestedProp));
     userResults.forEach((item, index) => generateEmployeeInfo(item, index));
     // Remove active filter, if exists
-    if(activeFilter){
+    if (activeFilter) {
         activeFilter.classList.remove('active-filter');
     }
     event.target.classList.add('active-filter');
@@ -180,45 +180,78 @@ const modalSwitch = () => {
     }, 500);
 }
 
-const changeHTML =(element,text)=>{
-    element.innerHTML=text;
+const changeHTML = (element, text) => {
+    element.innerHTML = text;
 }
 //=========================================================
 // Fetch users and display error on console if error occurs
 fetchData('https://randomuser.me/api/?results=12&nat=us')
-.then(async e => {
-    await e.results.forEach((item, index) => {
-        generateEmployeeInfo(item, index);
-        userResults.push(item);
-    })
-}).catch(e => console.log(e))
-// After Fetch occurs displazy
-.finally(() => {
-    // Close
-    close.addEventListener('click', () => {
-        modalContainer.style.animation = "fadeOut .5s";
-        setTimeout(() => modalContainer.style.display = "none", 400);
+    .then(async e => {
+        await e.results.forEach((item, index) => {
+            generateEmployeeInfo(item, index);
+            userResults.push(item);
+        })
+    }).catch(e => console.log(e))
+    // After Fetch occurs displazy
+    .finally(() => {
+        // Close
+        close.addEventListener('click', escapeModal);
+        // * Functionality has been added to switch back and forth between employees when the detail modal window is open.
+        // Left arrow previous user
+        leftContainer.addEventListener('click', () => {
+
+            modalSwitch();
+        });
+        // Right arrow next users
+        rightContainer.addEventListener('click',rightArrowModal);
+        
+        // Key events for modal
+        document.addEventListener('keydown',
+            (e) => {
+                if (modalContainer.style.display !== "none") {
+                    if (e.key == "ArrowLeft") {
+                        leftArrowModal();
+                    } else if (e.key === "ArrowRight") {
+                       rightArrowModal();
+                    } else if (e.key === "Escape") {
+                        escapeModal();
+                    }
+                }
+            }
+        );
+
+        window.onclick = function(event) {
+            if (event.target == modalContainer) {
+                escapeModal();
+            }
+          }
+
+        //Click right arrow
+        //* Employees can be filtered by name or username
+        const aTozFilter = document.querySelector('.fName-az'),
+            zToaFilter = document.querySelector('.fName-za');
+        aTozFilter.addEventListener('click', (event) => filterCallback('name', 'first', false));
+        zToaFilter.addEventListener('click', (event) => filterCallback('name', 'first', true));
     });
-    // * Functionality has been added to switch back and forth between employees when the detail modal window is open.
-    // Left arrow previous user
-    leftContainer.addEventListener('click', () => {
-        if (employeeIndex == 0) {
-            return false;
-        }
-        employeeIndex--;
-        modalSwitch();
-    });
-    // Right arrow next user
-    rightContainer.addEventListener('click', () => {
-        if (employeeIndex == 11) {
-            return false;
-        }
-        employeeIndex++;
-        modalSwitch();
-    });
-    //* Employees can be filtered by name or username
-    const aTozFilter = document.querySelector('.fName-az'),
-        zToaFilter = document.querySelector('.fName-za');
-    aTozFilter.addEventListener('click', (event) => filterCallback('name', 'first', false));
-    zToaFilter.addEventListener('click', (event) => filterCallback('name', 'first', true));
-});
+
+// Event callbacks
+// Arrows
+const leftArrowModal = () =>{
+    if (employeeIndex == 0) {
+        return false;
+    }
+    employeeIndex--;
+    modalSwitch();
+}
+const rightArrowModal = () => {
+    if (employeeIndex == 11) {
+        return false;
+    }
+    employeeIndex++;
+    modalSwitch();
+}
+//Escape 
+const escapeModal = () =>{
+    modalContainer.style.animation = "fadeOut .5s";
+    setTimeout(() => modalContainer.style.display = "none", 400);
+}
